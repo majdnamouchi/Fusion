@@ -2,11 +2,14 @@ package tn.edu.esprit.sigma.fusion.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,7 +29,14 @@ public class CustomizedAds implements Serializable {
 	private String customizedMessage;
 	private Boolean isAPurchasedAd;
 	private Boolean isACustomizedMarketingAd;
+
 	private static final long serialVersionUID = 1L;
+
+	/*
+	 * link attributes
+	 */
+	private List<Buyer> buyers;
+	private Product product;
 
 	public CustomizedAds() {
 		super();
@@ -103,5 +113,23 @@ public class CustomizedAds implements Serializable {
 
 	public void setIsACustomizedMarketingAd(Boolean isACustomizedMarketingAd) {
 		this.isACustomizedMarketingAd = isACustomizedMarketingAd;
+	}
+
+	@OneToMany(mappedBy = "customizedAds")
+	public List<Buyer> getBuyers() {
+		return buyers;
+	}
+
+	public void setBuyers(List<Buyer> buyers) {
+		this.buyers = buyers;
+	}
+
+	@ManyToOne
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 }

@@ -1,24 +1,25 @@
 package tn.edu.esprit.sigma.fusion.entities;
 
 import java.io.Serializable;
-import java.lang.Boolean;
-import java.lang.Float;
-import java.lang.Integer;
-import java.lang.String;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Entity implementation class for Entity: OrderAndReview
  *
  */
-
-@Table(name="T_ORDERANDREVIEW")
-
+@Entity
+@Table(name = "T_ORDERANDREVIEW")
 public class OrderAndReview implements Serializable {
 
-	private Long orderAndReviewId;
+	private OrderAndReviewId orderAndReviewId;
 	private Float pricePaidByBuyer;
 	private String initialMessageToSeller;
 	private Boolean oderFulfilledBySeller;
@@ -29,18 +30,28 @@ public class OrderAndReview implements Serializable {
 	private String reviewTitle;
 	private String reviewText;
 	private Integer productRating;
-	
-	private static final long serialVersionUID = 1L;
-	
-	public OrderAndReview(){}
 
-	public OrderAndReview(Long orderAndReviewId, Float pricePaidByBuyer,
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * link attributes
+	 */
+	private Buyer buyer;
+	private Product product;
+
+	public OrderAndReview() {
+
+	}
+
+	public OrderAndReview(Float pricePaidByBuyer,
 			String initialMessageToSeller, Boolean oderFulfilledBySeller,
 			Boolean hasFiledComplaint, Date dateOfPurchase,
 			Boolean orderDeliveredToBuyer, Boolean buyerHasLeftAReview,
-			String reviewTitle, String reviewText, Integer productRating) {
+			String reviewTitle, String reviewText, Integer productRating,
+			Buyer buyer, Product product) {
 		super();
-		this.orderAndReviewId = orderAndReviewId;
+		this.orderAndReviewId.setBuyerId(buyer.getYouBayUserId());
+		this.orderAndReviewId.setProductId(product.getProductId());
 		this.pricePaidByBuyer = pricePaidByBuyer;
 		this.initialMessageToSeller = initialMessageToSeller;
 		this.oderFulfilledBySeller = oderFulfilledBySeller;
@@ -51,13 +62,16 @@ public class OrderAndReview implements Serializable {
 		this.reviewTitle = reviewTitle;
 		this.reviewText = reviewText;
 		this.productRating = productRating;
+		this.buyer = buyer;
+		this.product = product;
 	}
 
-	public Long getOrderAndReviewId() {
+	@EmbeddedId
+	public OrderAndReviewId getOrderAndReviewId() {
 		return orderAndReviewId;
 	}
 
-	public void setOrderAndReviewId(Long orderAndReviewId) {
+	public void setOrderAndReviewId(OrderAndReviewId orderAndReviewId) {
 		this.orderAndReviewId = orderAndReviewId;
 	}
 
@@ -68,7 +82,8 @@ public class OrderAndReview implements Serializable {
 	public void setPricePaidByBuyer(Float pricePaidByBuyer) {
 		this.pricePaidByBuyer = pricePaidByBuyer;
 	}
-@Column(length=1000)
+
+	@Column(length = 1000)
 	public String getInitialMessageToSeller() {
 		return initialMessageToSeller;
 	}
@@ -92,7 +107,8 @@ public class OrderAndReview implements Serializable {
 	public void setHasFiledComplaint(Boolean hasFiledComplaint) {
 		this.hasFiledComplaint = hasFiledComplaint;
 	}
-@Temporal(TemporalType.TIMESTAMP)
+
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getDateOfPurchase() {
 		return dateOfPurchase;
 	}
@@ -116,7 +132,8 @@ public class OrderAndReview implements Serializable {
 	public void setBuyerHasLeftAReview(Boolean buyerHasLeftAReview) {
 		this.buyerHasLeftAReview = buyerHasLeftAReview;
 	}
-@Column(length=25)
+
+	@Column(length = 25)
 	public String getReviewTitle() {
 		return reviewTitle;
 	}
@@ -124,7 +141,8 @@ public class OrderAndReview implements Serializable {
 	public void setReviewTitle(String reviewTitle) {
 		this.reviewTitle = reviewTitle;
 	}
-	@Column(length=1000)
+
+	@Column(length = 1000)
 	public String getReviewText() {
 		return reviewText;
 	}
@@ -143,6 +161,23 @@ public class OrderAndReview implements Serializable {
 		 * 
 		 */
 	}
-	
-	
+
+	@ManyToOne
+	public Buyer getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
+	}
+
+	@ManyToOne
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 }

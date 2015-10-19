@@ -1,19 +1,18 @@
 package tn.edu.esprit.sigma.fusion.entities;
 
 import java.io.Serializable;
-import java.lang.Boolean;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: Manager
  *
  */
 @Entity
-@Table(name="T_MANAGER")
-
+@Table(name = "T_MANAGER")
 public class Manager extends YouBayUser implements Serializable {
 
-	
 	private Boolean canManageCategories;
 	private Boolean canManageManagers;
 	private Boolean canModerateSellersAndBuyers;
@@ -23,8 +22,8 @@ public class Manager extends YouBayUser implements Serializable {
 
 	public Manager() {
 		super();
-	}   
-	
+	}
+
 	public Manager(Boolean canManageCategories, Boolean canManageManagers,
 			Boolean canModerateSellersAndBuyers, Boolean canAddAdvertisement,
 			Boolean canExportData) {
@@ -42,28 +41,33 @@ public class Manager extends YouBayUser implements Serializable {
 
 	public void setCanManageCategories(Boolean canManageCategories) {
 		this.canManageCategories = canManageCategories;
-	}   
+	}
+
 	public Boolean getCanManageManagers() {
 		return this.canManageManagers;
 	}
 
 	public void setCanManageManagers(Boolean canManageManagers) {
 		this.canManageManagers = canManageManagers;
-	}   
+	}
+
 	public Boolean getCanModerateSellersAndBuyers() {
 		return this.canModerateSellersAndBuyers;
 	}
 
-	public void setCanModerateSellersAndBuyers(Boolean canModerateSellersAndBuyers) {
+	public void setCanModerateSellersAndBuyers(
+			Boolean canModerateSellersAndBuyers) {
 		this.canModerateSellersAndBuyers = canModerateSellersAndBuyers;
-	}   
+	}
+
 	public Boolean getCanAddAdvertisement() {
 		return this.canAddAdvertisement;
 	}
 
 	public void setCanAddAdvertisement(Boolean canAddAdvertisement) {
 		this.canAddAdvertisement = canAddAdvertisement;
-	}   
+	}
+
 	public Boolean getCanExportData() {
 		return this.canExportData;
 	}
@@ -71,5 +75,5 @@ public class Manager extends YouBayUser implements Serializable {
 	public void setCanExportData(Boolean canExportData) {
 		this.canExportData = canExportData;
 	}
-   
+
 }

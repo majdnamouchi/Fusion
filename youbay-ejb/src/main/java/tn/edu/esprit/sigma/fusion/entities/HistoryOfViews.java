@@ -3,20 +3,53 @@ package tn.edu.esprit.sigma.fusion.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 /**
  * Entity implementation class for Entity: HistoryOfViews
  *
  */
-
+@Entity
+@Table(name = "t_HistoryOfViews")
 public class HistoryOfViews implements Serializable {
-	private Long historyOfViewsId;
+	private HistoryOfViewsId historyOfViewsId;
 	private Date dateTimeOfView;
+
 	private static final long serialVersionUID = 1L;
+
+	/*
+	 * link attributes
+	 */
+	private Buyer buyer;
+	private Product product;
 
 	public HistoryOfViews() {
 		super();
 	}
 
+	public HistoryOfViews(Date dateTimeOfView, Buyer buyer, Product product) {
+		super();
+		this.historyOfViewsId.setProductId(product.getProductId());
+		this.historyOfViewsId.setBuyerId(buyer.getYouBayUserId());
+		this.dateTimeOfView = dateTimeOfView;
+
+	}
+
+	@EmbeddedId
+	public HistoryOfViewsId getHistoryOfViewsId() {
+		return historyOfViewsId;
+	}
+
+	public void setHistoryOfViewsId(HistoryOfViewsId historyOfViewsId) {
+		this.historyOfViewsId = historyOfViewsId;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getDateTimeOfView() {
 		return this.dateTimeOfView;
 	}
@@ -25,12 +58,22 @@ public class HistoryOfViews implements Serializable {
 		this.dateTimeOfView = dateTimeOfView;
 	}
 
-	public Long getHistoryOfViewsId() {
-		return historyOfViewsId;
+	@ManyToOne
+	public Buyer getBuyer() {
+		return buyer;
 	}
 
-	public void setHistoryOfViewsId(Long historyOfViewsId) {
-		this.historyOfViewsId = historyOfViewsId;
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
+	}
+
+	@ManyToOne
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 }

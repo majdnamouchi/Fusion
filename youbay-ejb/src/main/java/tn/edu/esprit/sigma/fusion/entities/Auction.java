@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +26,12 @@ public class Auction implements Serializable {
 	private Float currentPrice;
 
 	private static final long serialVersionUID = 1L;
+
+	/*
+	 * link attributes
+	 */
+	private Buyer buyer;
+	private Product product;
 
 	public Auction() {
 		super();
@@ -71,5 +78,23 @@ public class Auction implements Serializable {
 
 	public void setCurrentPrice(Float currentPrice) {
 		this.currentPrice = currentPrice;
+	}
+
+	@ManyToOne
+	public Buyer getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
+	}
+
+	@ManyToOne
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 }

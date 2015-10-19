@@ -2,13 +2,14 @@ package tn.edu.esprit.sigma.fusion.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import tn.edu.esprit.sigma.fusion.utilities.DataValidators;
-
 
 /**
  * Entity implementation class for Entity: Seller
@@ -27,6 +28,10 @@ public class Seller extends YouBayUser implements Serializable {
 	private String sellerLogo;// URL-image
 
 	private static final long serialVersionUID = 1L;
+	/*
+	 * link attributes
+	 */
+	private List<Product> products;
 
 	public Seller() {
 		super();
@@ -106,10 +111,25 @@ public class Seller extends YouBayUser implements Serializable {
 	}
 
 	public void setSellerLogo(String sellerLogo) throws Exception {
-		if (DataValidators.checkIfStringIsValidImageURL(sellerLogo)){
-			this.sellerLogo = sellerLogo;	
-		}else throw new Exception("    >>>>>>   " + Seller.class.getCanonicalName() + " - method : " +
-			"setSellerLogo - "+ " illegal image URL : " + sellerLogo + " ! " );	
+		if (DataValidators.checkIfStringIsValidImageURL(sellerLogo)) {
+			this.sellerLogo = sellerLogo;
+		} else
+			throw new Exception("    >>>>>>   "
+					+ Seller.class.getCanonicalName() + " - method : "
+					+ "setSellerLogo - " + " illegal image URL : " + sellerLogo
+					+ " ! ");
+	}
+
+	/*
+	 * link attributes
+	 */
+	@OneToMany(mappedBy = "seller")
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 }

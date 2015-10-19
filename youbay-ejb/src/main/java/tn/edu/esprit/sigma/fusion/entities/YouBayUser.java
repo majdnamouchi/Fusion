@@ -23,8 +23,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "T_USER")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="USER_TYPE",discriminatorType = DiscriminatorType.STRING)
-
+@DiscriminatorColumn(name = "USER_TYPE", discriminatorType = DiscriminatorType.STRING)
 public class YouBayUser implements Serializable {
 
 	private Long youBayUserId;
@@ -36,15 +35,14 @@ public class YouBayUser implements Serializable {
 	private String countryOfResidence;
 	private Boolean isActive;
 	private Boolean isBanned;
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	public YouBayUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public YouBayUser(String firstName, String lastName, String email,
 			String phoneNumber, Date birthday, String countryOfResidence,
 			Boolean isActive, Boolean isBanned) {
@@ -59,68 +57,82 @@ public class YouBayUser implements Serializable {
 		this.isBanned = isBanned;
 	}
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	public Long getYouBayUserId() {
 		return youBayUserId;
 	}
+
 	public void setYouBayUserId(Long youBayUserId) {
 		this.youBayUserId = youBayUserId;
 	}
-	@Column(length=100)
+
+	@Column(length = 100)
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	@Column(length=100)
+
+	@Column(length = 100)
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	@Column(length=100,unique=true)
+
+	@Column(length = 100, unique = true)
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@Column(length=100,unique=true)
+
+	@Column(length = 100, unique = true)
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	
+
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
 	@Temporal(TemporalType.DATE)
 	public Date getBirthday() {
 		return birthday;
 	}
+
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	@Column(length=100)
+
+	@Column(length = 100)
 	public String getCountryOfResidence() {
 		return countryOfResidence;
 	}
+
 	public void setCountryOfResidence(String countryOfResidence) {
 		this.countryOfResidence = countryOfResidence;
 	}
+
 	public Boolean getIsActive() {
 		return isActive;
 	}
+
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
+
 	public Boolean getIsBanned() {
 		return isBanned;
 	}
+
 	public void setIsBanned(Boolean isBanned) {
 		this.isBanned = isBanned;
 	}
