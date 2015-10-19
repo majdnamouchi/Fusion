@@ -4,6 +4,18 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="youbay-ejb">
 		<jta-data-source>java:jboss/datasources/youbayDS</jta-data-source>
+		<class>tn.edu.esprit.sigma.fusion.entities.YouBayUser</class>
+		<class>tn.edu.esprit.sigma.fusion.entities.Manager</class>
+		<class>tn.edu.esprit.sigma.fusion.entities.Seller</class>
+		<class>tn.edu.esprit.sigma.fusion.entities.Buyer</class>
+		<class>tn.edu.esprit.sigma.fusion.entities.Category</class>
+		<class>tn.edu.esprit.sigma.fusion.entities.Subcategory</class>
+		<class>tn.edu.esprit.sigma.fusion.entities.AssistantItems</class>
+		<class>tn.edu.esprit.sigma.fusion.entities.SpecialPromotion</class>
+		<class>tn.edu.esprit.sigma.fusion.entities.Auction</class>
+		<class>tn.edu.esprit.sigma.fusion.entities.CustomizedAds</class>
+		<class>tn.edu.esprit.sigma.fusion.entities.Product</class>
+		<class>tn.edu.esprit.sigma.fusion.entities.ProductHistory</class>
 		
 		
 		
