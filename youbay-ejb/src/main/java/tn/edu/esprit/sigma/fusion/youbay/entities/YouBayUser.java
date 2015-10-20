@@ -38,12 +38,12 @@ public class YouBayUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public YouBayUser() {
+	protected YouBayUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public YouBayUser(String firstName, String lastName, String email,
+	protected YouBayUser(String firstName, String lastName, String email,
 			String phoneNumber, Date birthday, String countryOfResidence,
 			Boolean isActive, Boolean isBanned) {
 		super();

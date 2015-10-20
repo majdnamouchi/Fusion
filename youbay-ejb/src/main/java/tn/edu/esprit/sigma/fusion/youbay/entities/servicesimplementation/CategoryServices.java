@@ -1,52 +1,71 @@
 package tn.edu.esprit.sigma.fusion.youbay.entities.servicesimplementation;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import tn.edu.esprit.sigma.fusion.youbay.entities.Category;
-import tn.edu.esprit.sigma.fusion.youbay.entities.services.CategoryLocal;
-import tn.edu.esprit.sigma.fusion.youbay.entities.services.CategoryRemote;
+import tn.edu.esprit.sigma.fusion.youbay.entities.localservices.CategoryServicesLocal;
+import tn.edu.esprit.sigma.fusion.youbay.entities.remoteservices.CategoryServicesRemote;
 
 /**
  * Session Bean implementation class CategoryServices
  */
 @Stateless
-public class CategoryServices implements CategoryRemote, CategoryLocal {
+public class CategoryServices implements CategoryServicesRemote, CategoryServicesLocal {
 
-    /**
-     * Default constructor. 
-     */
-    public CategoryServices() {
-        // TODO Auto-generated constructor stub
-    }
+	@PersistenceContext
+	EntityManager entityManager;
+
+	/**
+	 * Default constructor.
+	 */
+	public CategoryServices() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public Boolean addCategory(Category theCategory) {
-		// TODO Auto-generated method stub
-		return null;
+		Boolean b = false;
+		try {
+			entityManager.persist(theCategory);
+			b = true;
+		} catch (Exception e) {
+		}
+		return b;
 	}
 
 	@Override
 	public Category findCategory(Category theCategory) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Category.class, theCategory.getCategoryId());
 	}
 
 	@Override
 	public Category findCategoryById(Long theId) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Category.class, theId);
 	}
 
 	@Override
 	public Boolean updateCategory(Category theCategory) {
-		// TODO Auto-generated method stub
-		return null;
+		boolean b = false;
+		try {
+			entityManager.merge(theCategory);
+			b = true;
+		} catch (Exception e) {
+		}
+		return b;
 	}
 
 	@Override
 	public Boolean deleteCategory(Category theCategory) {
-		// TODO Auto-generated method stub
-		return null;
+		Boolean b = false;
+		try {
+			theCategory = findCategoryById(theCategory.getCategoryId());
+			entityManager.remove(theCategory);
+			b = true;
+		} catch (Exception e) {
+		}
+		return b;
 	}
 
 }

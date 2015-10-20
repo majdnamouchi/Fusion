@@ -1,10 +1,12 @@
 package tn.edu.esprit.sigma.fusion.youbay.entities.servicesimplementation;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import tn.edu.esprit.sigma.fusion.youbay.entities.Buyer;
-import tn.edu.esprit.sigma.fusion.youbay.entities.services.BuyerServicesLocal;
-import tn.edu.esprit.sigma.fusion.youbay.entities.services.BuyerServicesRemote;
+import tn.edu.esprit.sigma.fusion.youbay.entities.localservices.BuyerServicesLocal;
+import tn.edu.esprit.sigma.fusion.youbay.entities.remoteservices.BuyerServicesRemote;
 
 /**
  * Session Bean implementation class BuyerServices
@@ -12,41 +14,58 @@ import tn.edu.esprit.sigma.fusion.youbay.entities.services.BuyerServicesRemote;
 @Stateless
 public class BuyerServices implements BuyerServicesRemote, BuyerServicesLocal {
 
-    /**
-     * Default constructor. 
-     */
-    public BuyerServices() {
-        // TODO Auto-generated constructor stub
-    }
+	@PersistenceContext
+	EntityManager entityManager;
+
+	/**
+	 * Default constructor.
+	 */
+	public BuyerServices() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public Boolean addBuyer(Buyer theBuyer) {
-		// TODO Auto-generated method stub
-		return null;
+		Boolean b = false;
+		try {
+			entityManager.persist(theBuyer);
+			b = true;
+		} catch (Exception e) {
+		}
+		return b;
 	}
 
 	@Override
 	public Buyer findBuyer(Buyer theBuyer) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Buyer.class, theBuyer.getYouBayUserId());
 	}
 
 	@Override
 	public Buyer findBuyerById(Long theId) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Buyer.class, theId);
 	}
 
 	@Override
 	public Boolean updateBuyer(Buyer theBuyer) {
-		// TODO Auto-generated method stub
-		return null;
+		boolean b = false;
+		try {
+			entityManager.merge(theBuyer);
+			b = true;
+		} catch (Exception e) {
+		}
+		return b;
 	}
 
 	@Override
 	public Boolean deleteBuyer(Buyer theBuyer) {
-		// TODO Auto-generated method stub
-		return null;
+		Boolean b = false;
+		try {
+			theBuyer = findBuyerById(theBuyer.getYouBayUserId());
+			entityManager.remove(theBuyer);
+			b = true;
+		} catch (Exception e) {
+		}
+		return b;
 	}
 
 }

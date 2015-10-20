@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -59,6 +60,7 @@ public class HistoryOfViews implements Serializable {
 	}
 
 	@ManyToOne
+	@JoinColumn(name="BuyerId")
 	public Buyer getBuyer() {
 		return buyer;
 	}
@@ -68,6 +70,7 @@ public class HistoryOfViews implements Serializable {
 	}
 
 	@ManyToOne
+	@JoinColumn(name="ProductId")
 	public Product getProduct() {
 		return product;
 	}
