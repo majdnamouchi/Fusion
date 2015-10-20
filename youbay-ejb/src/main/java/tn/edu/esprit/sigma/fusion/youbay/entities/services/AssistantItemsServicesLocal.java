@@ -15,7 +15,5 @@ public interface AssistantItemsServicesLocal {
 	Boolean updateAssistantItems(AssistantItems theAssistantItems);
 
 	Boolean deleteAssistantItems(AssistantItems theAssistantItems);
-
-	// Comment for git testing purposes
 	
 }
